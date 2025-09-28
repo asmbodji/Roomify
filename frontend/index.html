@@ -57,19 +57,39 @@
 <!-- ... le reste du code ne change pas ... -->
 
 <script>
-  // Ouverture de l’input file
-  document.getElementById('try-now').addEventListener('click', () => {
-    document.getElementById('upload').click();
+document.getElementById('try-now').addEventListener('click', () => {
+  document.getElementById('upload').click();
+});
+
+document.getElementById('upload').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // Remplace par un select dans l'UI si tu veux plus propre
+  const style = prompt("Quel style ? (moderne, scandinave, minimaliste, industriel...)") || "moderne";
+
+  const formData = new FormData();
+  formData.append('photo', file);
+  formData.append('style', style);
+
+  // appelle ton backend (ajuste le port si nécessaire)
+  const res = await fetch('http://localhost:3000/api/decor', {
+    method: 'POST',
+    body: formData
   });
 
-  // Affiche un message quand une photo est choisie
-  document.getElementById('upload').addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      alert(`Photo sélectionnée : ${file.name}`);
-    }
-  });
+  if (!res.ok) {
+    const err = await res.json();
+    alert('Erreur: ' + (err.error || res.statusText));
+    return;
+  }
+
+  const data = await res.json();
+  // affichage simple : remplace par UI custom
+  alert('Suggestions:\n' + (Array.isArray(data.suggestions) ? data.suggestions.join('\n- ') : data.suggestions));
+});
 </script>
+
 
 
   <!-- Comment ça marche -->
