@@ -1,3 +1,0 @@
-# Renomme en .env et mets ta vraie clé avant de lancer
-OPENAI_API_KEY=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
-PORT=3000
