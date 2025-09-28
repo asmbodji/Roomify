@@ -9,41 +9,68 @@
 
 </head>
 <body>
-  <!-- Navbar -->
+  <div class="page-transition"></div>
+  
+  <!-- ton header / navbar -->
   <header class="navbar">
-  <div class="logo">
-    <img src="images/logo.png" alt="Roomify Logo">
-  </div>
-  <nav>
+    <div class="logo">
+      <img src="images/lol.png" alt="Logo">
+    </div>
     <ul>
-      <li><a href="#">Boutique</a></li>
-      <li><a href="#">Inspirations</a></li>
-      <li><a href="#">Fonctionnalités</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#"><i class="fa-solid fa-cart-shopping"></i>Panier</a>
-      </li>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="boutique.html">Boutique</a></li>
+      <li><a href="inspirations.html">Inspirations</a></li>
+      <li><a href="features.html">Fonctionnalités</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
-  </nav>
-</header>
+  </header>
+
 
   <!-- Hero -->
-  <section class="hero">
+  <!-- Hero -->
+<section class="hero">
   <div class="hero-text">
     <h1 class="typing-text">Re-décorez votre pièce en un clic <br> avec l'IA</h1>
     <p>Prenez une photo de votre pièce et laissez l’IA trouver la nouvelle décoration</p>
-    <a href="#" class="btn">Essayez maintenant</a>
+
+    <!-- BOUTON + input caché -->
+    <button id="try-now" class="btn cta-btn">Essayez maintenant</button>
+    <input type="file" id="upload" accept="image/*" style="display:none;">
+    <p class="info-text">💡 Pour de meilleurs résultats, utilisez une photo panoramique</p>
   </div>
+
   <div class="hero-image">
-    <div class="before-after">
-      <img src="images/before.png" alt="Before">
-      <img src="images/after.png" alt="After">
+  <div class="before-after">
+    <div class="image-container">
+      <img src="images/before.png" alt="Before" class="ba-img">
+      <span class="img-label">Before</span>
     </div>
-    <div class="labels">
-      <span>Before</span>
-      <span>After</span>
+    <div class="image-container">
+      <img src="images/after.png" alt="After" class="ba-img">
+      <span class="img-label">After</span>
     </div>
   </div>
+</div>
+
 </section>
+
+<!-- ... le reste du code ne change pas ... -->
+
+<script>
+  // Ouverture de l’input file
+  document.getElementById('try-now').addEventListener('click', () => {
+    document.getElementById('upload').click();
+  });
+
+  // Affiche un message quand une photo est choisie
+  document.getElementById('upload').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      alert(`Photo sélectionnée : ${file.name}`);
+    }
+  });
+</script>
+
 
   <!-- Comment ça marche -->
   <section class="steps">
@@ -80,7 +107,46 @@
     <a href="#" class="btn">Essayez maintenant</a>
   </section>
 
+w
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Liste des backgrounds (mets tes propres chemins d'images)
+  const backgrounds = [
+    "images/background.jpg",
+    "images/background2.jpg",
+    "images/background1.jpg",
+    "images/background4.jpeg",
+    "images/background5.jpg"
+  ];
 
-  
+  const hero = document.querySelector(".hero");
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % backgrounds.length;
+    hero.style.backgroundImage = `url('${backgrounds[index]}')`;
+  }, 10000); // 10 000 ms = 10s
+});
+</script>
+
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const transitionEl = document.querySelector(".page-transition");
+    const boutiqueLink = document.querySelector("a[href*='boutique']");
+
+    if (boutiqueLink) {
+      boutiqueLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        transitionEl.classList.add("active");
+
+        setTimeout(() => {
+          window.location.href = boutiqueLink.href;
+        }, 800); // doit correspondre au "transition: 0.8s"
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
