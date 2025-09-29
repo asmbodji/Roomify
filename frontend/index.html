@@ -73,10 +73,11 @@ document.getElementById('upload').addEventListener('change', async (e) => {
   formData.append('style', style);
 
   // appelle ton backend (ajuste le port si nécessaire)
-  const res = await fetch('http://localhost:3000/api/decor', {
-    method: 'POST',
-    body: formData
-  });
+  const res = await fetch('https://roomify-1-0tbs.onrender.com/api/decor', {
+  method: 'POST',
+  body: formData
+});
+
 
   if (!res.ok) {
     const err = await res.json();
